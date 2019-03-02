@@ -1,0 +1,101 @@
+swagger: "2.0"
+info:
+  description: "Serverless application to notify Slack of unreserved tennis court."
+  version: "1.0.0"
+  title: "Tennis Court Watchman"
+basePath: "/"
+tags:
+- name: "tennisCourt"
+- name: "date"
+  description: "Date to get available time."
+schemes:
+- "https"
+- "http"
+paths:
+  /dipatch:
+    post:
+      summary: "Dispatch tasks"
+      description: ""
+      operationId: "dispatch"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "token"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Success"
+  /sites/{siteId}/tennis-courts/{tennisCourtId}:
+    post:
+      tags:
+      - "tennisCourt"
+      summary: "Scraping the availability of the tennis court"
+      description: ""
+      parameters:
+      - name: "token"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "siteId"
+        in: "path"
+        description: "ID of tennis court reservation site"
+        required: true
+        type: "string"
+      - name: "tennisCourtId"
+        in: "path"
+        description: "ID of tennis court"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Success"
+  /sites/{siteId}/tennis-courts/{tennisCourtId}/date/{date}:
+    post:
+      tags:
+      - "date"
+      summary: "Scraping tennis court availability on a specific date"
+      description: ""
+      parameters:
+      - name: "token"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "siteId"
+        in: "path"
+        description: "ID of tennis court reservation site"
+        required: true
+        type: "string"
+      - name: "tennisCourtId"
+        in: "path"
+        description: "ID of tennis court"
+        required: true
+        type: "string"
+      - name: "date"
+        in: "path"
+        description: "Target date"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Success"
+  /report:
+    post:
+      summary: "Post results to slack"
+      description: ""
+      operationId: "report"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "token"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Success"
