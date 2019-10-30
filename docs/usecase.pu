@@ -1,0 +1,20 @@
+@startuml ユースケース図
+
+left to right direction
+skinparam packageStyle rect
+
+actor :ユーザー: as user
+
+package "空き状況" {
+    usecase (空き状況を一覧表示する) as list
+    usecase (空き状況を絞り込み検索する) as search
+    usecase (検索条件を保存する) as config
+}
+
+note right of search: 自治体・公園・曜日・時間帯など
+
+user --> list
+user --> search
+user --> config
+
+@enduml
